@@ -1,0 +1,74 @@
+/*
+colors
+*/
+
+$primary-color: #44281D;
+$secondary-color: #E4A788;
+$tertiary-color: #EFE04B;
+$quaternary-color: #98CD4D;
+$quinary-color: #E899C7;
+$red-color: #B90000;
+$green-color: #98CD4D;
+$gray-color: #B8B8B8;
+$background-color: #F5F5F5;
+
+/* 
+header font sizes
+*/
+
+$h1-font-size: 24px;
+$h2-font-size: 18px;
+$h3-font-size: 16px;
+$h4-font-size: 13px;
+
+
+/*
+font family
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap');
+
+$font-family: 'Poppins', sans-serif;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $font-family;
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h3 {
+  font-size: $h3-font-size;
+}
+
+h4 {
+  font-size: $h4-font-size;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+  body {
+    color: black;
+    background: $background-color;;
+  }
+}
+
