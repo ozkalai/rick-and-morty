@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CharacterResponse } from "../types/Character";
 
-export const getAllCharcters = (status?: "alive" | "dead" | "unknown") => {
+export const getAllCharacters = (status?: "alive" | "dead" | "unknown") => {
   try {
     const response = axios
       .get<CharacterResponse>(
