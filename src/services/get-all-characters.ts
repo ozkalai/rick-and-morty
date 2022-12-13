@@ -1,15 +1,14 @@
-import axios from "axios";
 import { CharacterResponse } from "../types/Character";
 
-export const getAllCharacters = (status?: "alive" | "dead" | "unknown") => {
+export const getAllCharacters = async (
+  status?: "alive" | "dead" | "unknown"
+) => {
   try {
-    const response = axios
-      .get<CharacterResponse>(
-        `${process.env.NEXT_PUBLIC_API_URL}/character${
-          status ? `?status=${status}` : ""
-        }`
-      )
-      .then((res) => res.data as CharacterResponse);
+    const response: CharacterResponse = await fetch(
+      `https://rickandmortyapi.com/api/character${
+        status ? `?status=${status}` : ""
+      }`
+    ).then((res) => res.json());
     return response;
   } catch (error) {
     console.error(error);
