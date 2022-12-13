@@ -34,6 +34,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params?.id;
   const character = await getCharacter(id as string);
+
+  if (!character) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       character,
