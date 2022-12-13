@@ -1,5 +1,3 @@
-// create a character detail page that will be fetch character data as static by using getCharacterById
-
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getCharacter } from "../../src/services/get-character";
 import { Character } from "../../src/types/Character";
