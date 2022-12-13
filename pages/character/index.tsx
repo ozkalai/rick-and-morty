@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../src/store/hooks";
-import { Character } from "../../src/types/Character";
 import { Pagination } from "../../src/components/Pagination";
 import { setIsLoading } from "../../src/store/slices/locations";
 import {

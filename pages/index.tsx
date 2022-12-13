@@ -1,6 +1,5 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import styles from "../styles/Home.module.css";
 import { getLocations } from "../src/services/get-locations";
 import { useRouter } from "next/router";
 import { LocationResponse, Location } from "../src/types/Location";
@@ -50,7 +49,7 @@ function Home({ locations }: { locations: LocationResponse }) {
   const totalPages = locations?.info?.pages;
 
   return (
-    <div style={{ position: "relative" }} className={styles.container}>
+    <div style={{ position: "relative" }}>
       {isLoading ? (
         <div
           style={{
