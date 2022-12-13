@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { store } from "../src/store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import Layout from "../src/components/Layout";
 
 export default function App({ Component, pageProps }: AppProps) {
   let persistor = persistStore(store);
@@ -11,7 +12,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </PersistGate>
     </Provider>
   );
