@@ -1,0 +1,38 @@
+@import "../../../styles/config/variables" ;
+
+.header {
+    position: relative;
+    text-align: center;
+    border-bottom: 1px solid $logo-color-slighly-transparent;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &__logo {
+        width: 100%;
+        height: 60px;
+    }
+    
+    @media (max-width: 768px) {
+        &__logo {
+            height: 40px;
+            margin-top: 1rem;
+        }
+    }
+
+    &__icon {
+        margin-left: 2rem;
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        &__icon {
+            margin-left: 1rem;
+            margin-top: 1rem;
+        }
+    }
+
+}

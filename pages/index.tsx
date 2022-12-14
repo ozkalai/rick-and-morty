@@ -1,6 +1,5 @@
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import styles from "../styles/Home.module.css";
 import { getLocations } from "../src/services/get-locations";
 import { useRouter } from "next/router";
 import { LocationResponse, Location } from "../src/types/Location";
@@ -12,6 +11,8 @@ import {
   setCurrentPage,
 } from "../src/store/slices/locations";
 import { useAppSelector } from "../src/store/hooks";
+import LocationCard from "../src/components/LocationCard";
+import styles from "../styles/pages/Location.module.scss";
 
 function Home({ locations }: { locations: LocationResponse }) {
   const { push } = useRouter();
@@ -22,7 +23,7 @@ function Home({ locations }: { locations: LocationResponse }) {
   );
   const currentPage = useAppSelector((state) => state.location.currentPage);
 
-  const handlePageChange = (location: Location) => () => {
+  const handlePageChange = (location: Location) => {
     push("character");
     dispatch(setIsLoading(true));
     dispatch(setSelectedLocation(location));
@@ -50,7 +51,7 @@ function Home({ locations }: { locations: LocationResponse }) {
   const totalPages = locations?.info?.pages;
 
   return (
-    <div style={{ position: "relative" }} className={styles.container}>
+    <div style={{ position: "relative" }}>
       {isLoading ? (
         <div
           style={{
@@ -63,24 +64,29 @@ function Home({ locations }: { locations: LocationResponse }) {
           Page loading...
         </div>
       ) : (
-        <>
-          <h1>Locations</h1>
-          <ul>
-            {locationsFromStore?.results?.map((location: Location) => (
-              <li onClick={handlePageChange(location)} key={location.id}>
-                {location.name}
-              </li>
-            ))}
-          </ul>
-
-          <Pagination
-            onPageChange={(page: number) => {
-              dispatch(setCurrentPage(page));
-            }}
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
-        </>
+        <div>
+          <div className={styles.container}>
+            <div className={styles.locations}>
+              {locationsFromStore?.results?.map((location: Location) => (
+                <div
+                  onClick={() => handlePageChange(location)}
+                  key={location.id}
+                >
+                  <LocationCard location={location} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={styles.pagination__wapper}>
+            <Pagination
+              onPageChange={(page: number) => {
+                dispatch(setCurrentPage(page));
+              }}
+              currentPage={currentPage}
+              totalPages={totalPages}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

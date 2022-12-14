@@ -1,3 +1,6 @@
+import ArrowIcon from "../ArrowIcon";
+import styles from "./Pagination.module.scss";
+
 type PaginationProps = {
   totalPages: number;
   currentPage: number;
@@ -10,32 +13,38 @@ export const Pagination = ({
   onPageChange,
 }: PaginationProps) => {
   return (
-    <div className="pagination" style={{ display: "flex" }}>
-      <button
-        className="pagination__button"
-        disabled={currentPage === 1}
-        onClick={() => onPageChange(currentPage - 1)}
-      >
-        ←
-      </button>
-      {currentPage !== 1 && <button onClick={() => onPageChange(1)}>1</button>}
+    <div className={styles.pagination}>
+      <div className={styles.left__arrow}>
+        <ArrowIcon
+          style={currentPage === 1 ? { opacity: 0.5 } : {}}
+          onClick={() => onPageChange(currentPage - 1)}
+        />
+      </div>
+      {currentPage !== 1 && (
+        <button
+          className={styles.pagination__button}
+          onClick={() => onPageChange(1)}
+        >
+          1
+        </button>
+      )}
       {currentPage !== 1 && currentPage - 1 !== 1 && (
-        <div style={{ display: "flex", gap: "2px" }}>
-          <span>...</span>
+        <div className={styles.pagination__separator}>
+          <span className={styles.pagination__button__placeholder}>...</span>
           <button
+            className={styles.pagination__button}
             onClick={() => onPageChange(currentPage - 1)}
-            className="pagination__separator"
           >
             {currentPage - 1}
           </button>
         </div>
       )}
-      <span className="pagination__current-page">{currentPage}</span>
+      <span className={styles.pagination__current}>{currentPage}</span>
       {currentPage !== totalPages && currentPage !== totalPages - 1 && (
-        <div style={{ display: "flex", gap: "2px" }}>
+        <div className={styles.pagination__separator}>
           <button
+            className={styles.pagination__button}
             onClick={() => onPageChange(currentPage + 1)}
-            className="pagination__separator"
           >
             {currentPage + 1}
           </button>
@@ -43,15 +52,19 @@ export const Pagination = ({
         </div>
       )}
       {currentPage !== totalPages && (
-        <button onClick={() => onPageChange(totalPages)}>{totalPages}</button>
+        <button
+          className={styles.pagination__button}
+          onClick={() => onPageChange(totalPages)}
+        >
+          {totalPages}
+        </button>
       )}
-      <button
+
+      <ArrowIcon
         className="pagination__button"
-        disabled={currentPage === totalPages}
+        style={currentPage === totalPages ? { opacity: 0.5 } : {}}
         onClick={() => onPageChange(currentPage + 1)}
-      >
-        →
-      </button>
+      />
     </div>
   );
 };

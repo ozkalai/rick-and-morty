@@ -1,0 +1,33 @@
+@import "../../../styles/config/variables";
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+
+    &__button {
+                all: unset;
+                cursor: pointer;
+    }
+
+    &__separator{
+        display: flex;
+        gap: 1.75rem;
+    }
+
+    &__current {
+        font-weight: 600;
+        width: 3.125rem;
+        height: 3.125rem;
+        border-radius: 50%;
+        background: $gray-thin-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+
+.left__arrow {
+    transform: rotate(180deg);
+}
