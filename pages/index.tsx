@@ -23,7 +23,7 @@ function Home({ locations }: { locations: LocationResponse }) {
   );
   const currentPage = useAppSelector((state) => state.location.currentPage);
 
-  const handlePageChange = (location: Location) => () => {
+  const handlePageChange = (location: Location) => {
     push("character");
     dispatch(setIsLoading(true));
     dispatch(setSelectedLocation(location));
@@ -65,18 +65,27 @@ function Home({ locations }: { locations: LocationResponse }) {
         </div>
       ) : (
         <div>
-          <div className={styles.locations}>
-            {locationsFromStore?.results?.map((location: Location) => (
-              <LocationCard location={location} key={location.id} />
-            ))}
+          <div className={styles.container}>
+            <div className={styles.locations}>
+              {locationsFromStore?.results?.map((location: Location) => (
+                <div
+                  onClick={() => handlePageChange(location)}
+                  key={location.id}
+                >
+                  <LocationCard location={location} />
+                </div>
+              ))}
+            </div>
           </div>
-          <Pagination
-            onPageChange={(page: number) => {
-              dispatch(setCurrentPage(page));
-            }}
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
+          <div className={styles.pagination__wapper}>
+            <Pagination
+              onPageChange={(page: number) => {
+                dispatch(setCurrentPage(page));
+              }}
+              currentPage={currentPage}
+              totalPages={totalPages}
+            />
+          </div>
         </div>
       )}
     </div>
