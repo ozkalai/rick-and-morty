@@ -30,8 +30,10 @@
         font-weight: 400;
     }
 }
+
 @media screen and (max-width: 768px) {
     .card {
         padding: 1rem 1rem;
+        width: 100%;
     }
 }
