@@ -12,6 +12,7 @@ import {
 import FilterButton from "../../src/components/FilterButton";
 import { CharacterFilters } from "../../src/types/Character";
 import styles from "../../styles/pages/Character.module.scss";
+import Character from "../../src/components/Character";
 
 export const CharacterPage = () => {
   const [residentsIds, setResidentsIds] = useState<number[]>();
@@ -27,11 +28,9 @@ export const CharacterPage = () => {
   const currentPage = useAppSelector((state) => state.character.currentPage);
   const filter = useAppSelector((state) => state.character.filter);
 
-  const totalCharacters = characters?.length || 0;
-  const totalPage = Math.ceil(totalCharacters / 20);
-
   useEffect(() => {
     dispatch(setFilter(""));
+    dispatch(setCurrentPage(1));
   }, [dispatch]);
 
   useMemo(() => {
@@ -61,7 +60,7 @@ export const CharacterPage = () => {
     });
   }, [dispatch, residentsIds]);
 
-  const handleClick = (id: number) => () => {
+  const handleClick = (id: number) => {
     if (id) {
       router.push(`/character/${id}`);
     }
@@ -83,6 +82,9 @@ export const CharacterPage = () => {
     }
     return [];
   }, [characters, filter]);
+
+  const totalCharacters = filteredCharacters?.length || 0;
+  const totalPage = Math.ceil(totalCharacters / 20);
 
   const paginatedCharacters =
     filteredCharacters.length > 20
@@ -109,13 +111,15 @@ export const CharacterPage = () => {
         {error ? (
           <p className={styles.error}>{error}</p>
         ) : (
-          <ul>
+          <div className={styles.character__list}>
             {paginatedCharacters?.map((character) => (
-              <li onClick={handleClick(character.id)} key={character.id}>
-                {character.name} - {character.status}
-              </li>
+              <Character
+                key={character.id}
+                character={character}
+                handleClick={() => handleClick(character.id)}
+              />
             ))}
-          </ul>
+          </div>
         )}
       </div>
       {filteredCharacters.length > 20 && (
