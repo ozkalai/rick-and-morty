@@ -1,3 +1,8 @@
+.container {
+    min-height: calc(100vh - 15rem);
+    overflow: scroll;
+}
+
 .locations {
     margin: 0 auto;
     padding: 2.5rem .5rem;
@@ -5,8 +10,16 @@
     flex-wrap: wrap;
     gap: 1.25rem 3.125rem;
     justify-content: center;
-
+    
     @media screen and (max-width: 768px) {
         padding: 1.25rem 1rem;
     }
+}
+
+.pagination__wapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4.375rem;
 }
