@@ -31,3 +31,17 @@
     align-items: center;
     margin-bottom: 4.375rem;
 }
+
+.character__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .character__list {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+    }
+}
