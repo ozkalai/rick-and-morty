@@ -1,0 +1,33 @@
+.container {
+    padding: 2.25rem 2.5rem;
+    min-height: calc(100vh - 15rem);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0.625rem 0.875rem;
+    }
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    overflow-x: scroll;
+
+    &__title {
+        line-height: 22px;
+        font-weight: 500;
+    }
+    &__group {
+        display: flex;
+        gap: 0.625rem;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4.375rem;
+}

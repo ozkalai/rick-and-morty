@@ -1,0 +1,75 @@
+@import "../../../styles/config/variables";
+
+.button {
+    min-width: 120px;
+    height: auto;
+    padding: 0.75rem 0.875rem;
+    border-radius: 3.125rem;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.dot__base {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+} 
+
+.alive {
+    @extend .button;
+    background-color: $quaternary-idle-active-color;
+    border: 1px solid $quaternary-color;
+    
+    .dot {
+        @extend .dot__base;
+        background-color: $quaternary-color;
+    }
+
+    &:hover {
+        background-color: $quaternary-hover-color;
+    }
+}
+
+.alive.selected {
+    background-color: $quaternary-pressed-color
+}
+
+.dead {
+    @extend .button;
+    background-color: $red-idle-active-color;
+    border: 1px solid $red-color;
+    .dot {
+            @extend .dot__base;
+            background-color: $red-color;
+        }
+
+    &:hover {
+        background-color: $red-hover-color;
+    }
+}
+
+.dead.selected {
+    background-color: $red-pressed-color
+}
+
+.unknown {
+    @extend .button;
+    background-color: $gray-idle-active-color;
+    border: 1px solid $gray-color;
+    .dot {
+            @extend .dot__base;
+            background-color: $gray-color;
+        }
+
+    &:hover {
+        background-color: $gray-hover-color;
+    }
+}
+
+.unknown.selected {
+    background-color: $gray-pressed-color
+}

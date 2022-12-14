@@ -7,7 +7,6 @@ import { Pagination } from "../src/components/Pagination";
 import {
   setLocations,
   setSelectedLocation,
-  setIsLoading,
   setCurrentPage,
 } from "../src/store/slices/locations";
 import { useAppSelector } from "../src/store/hooks";
@@ -17,7 +16,6 @@ import styles from "../styles/pages/Location.module.scss";
 function Home({ locations }: { locations: LocationResponse }) {
   const { push } = useRouter();
   const dispatch = useDispatch();
-  const isLoading = useAppSelector((state) => state.location.isLoading);
   const locationsFromStore = useAppSelector(
     (state) => state.location.locations
   );
@@ -25,7 +23,6 @@ function Home({ locations }: { locations: LocationResponse }) {
 
   const handlePageChange = (location: Location) => {
     push("character");
-    dispatch(setIsLoading(true));
     dispatch(setSelectedLocation(location));
   };
 
@@ -51,43 +48,27 @@ function Home({ locations }: { locations: LocationResponse }) {
   const totalPages = locations?.info?.pages;
 
   return (
-    <div style={{ position: "relative" }}>
-      {isLoading ? (
-        <div
-          style={{
-            width: "100%",
-            height: "100vh",
-            background: "red",
-            position: "absolute",
-          }}
-        >
-          Page loading...
-        </div>
-      ) : (
-        <div>
-          <div className={styles.container}>
-            <div className={styles.locations}>
-              {locationsFromStore?.results?.map((location: Location) => (
-                <div
-                  onClick={() => handlePageChange(location)}
-                  key={location.id}
-                >
-                  <LocationCard location={location} />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className={styles.pagination__wapper}>
-            <Pagination
-              onPageChange={(page: number) => {
-                dispatch(setCurrentPage(page));
-              }}
-              currentPage={currentPage}
-              totalPages={totalPages}
-            />
+    <div>
+      <div>
+        <div className={styles.container}>
+          <div className={styles.locations}>
+            {locationsFromStore?.results?.map((location: Location) => (
+              <div onClick={() => handlePageChange(location)} key={location.id}>
+                <LocationCard location={location} />
+              </div>
+            ))}
           </div>
         </div>
-      )}
+        <div className={styles.pagination__wapper}>
+          <Pagination
+            onPageChange={(page: number) => {
+              dispatch(setCurrentPage(page));
+            }}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        </div>
+      </div>
     </div>
   );
 }
