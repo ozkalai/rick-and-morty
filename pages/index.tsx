@@ -48,7 +48,7 @@ function Home({ locations }: { locations: LocationResponse }) {
   const totalPages = locations?.info?.pages;
 
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <div>
         <div className={styles.container}>
           <div className={styles.locations}>
