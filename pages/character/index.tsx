@@ -8,7 +8,11 @@ import {
   setError,
   setCharacters,
   setCurrentPage,
+  setFilter,
 } from "../../src/store/slices/characters";
+import FilterButton from "../../src/components/FilterButton";
+import { CharacterFilters } from "../../src/types/Character";
+import styles from "../../styles/pages/Character.module.scss";
 
 export const CharacterPage = () => {
   const [residentsIds, setResidentsIds] = useState<number[]>();
@@ -44,23 +48,27 @@ export const CharacterPage = () => {
   }, [dispatch, selectedLocation.residents]);
 
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/${residentsIds}`).then(
-      (response) => {
-        response.json().then((data) => {
-          if (typeof data === "object" && !Array.isArray(data)) {
-            dispatch(setCharacters([data]));
-            return;
-          }
-          dispatch(setCharacters(data));
-        });
-      }
-    );
+    fetch(
+      `https://rickandmortyapi.com/api/character/${residentsIds}?status=dead`
+    ).then((response) => {
+      response.json().then((data) => {
+        if (typeof data === "object" && !Array.isArray(data)) {
+          dispatch(setCharacters([data]));
+          return;
+        }
+        dispatch(setCharacters(data));
+      });
+    });
   }, [dispatch, residentsIds]);
 
   const handleClick = (id: number) => () => {
     if (id) {
       router.push(`/character/${id}`);
     }
+  };
+
+  const handleClickFilter = (filter: CharacterFilters) => {
+    dispatch(setFilter(filter));
   };
 
   const paginatedCharacters =
@@ -73,8 +81,22 @@ export const CharacterPage = () => {
       {error ? (
         <p>{error}</p>
       ) : (
-        <>
-          <h1>Characters</h1>
+        <div className={styles.container}>
+          <div className={styles.filter}>
+            <h3 className={styles.filter__title}>Filter by status:</h3>
+            <div className={styles.filter__group}>
+              {(["alive", "dead", "unknown"] as CharacterFilters[]).map(
+                (filter) => (
+                  <FilterButton
+                    filter={filter}
+                    handleClick={() => handleClickFilter(filter)}
+                    key={filter}
+                  />
+                )
+              )}
+            </div>
+          </div>
+
           <ul>
             {paginatedCharacters?.map((character) => (
               <li onClick={handleClick(character.id)} key={character.id}>
@@ -88,7 +110,7 @@ export const CharacterPage = () => {
             totalPages={totalPage}
             onPageChange={(e) => dispatch(setCurrentPage(e))}
           />
-        </>
+        </div>
       )}
     </div>
   );
