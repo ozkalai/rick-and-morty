@@ -25,9 +25,14 @@ export const CharacterPage = () => {
   const error = useAppSelector((state) => state.character.error);
   const characters = useAppSelector((state) => state.character.characters);
   const currentPage = useAppSelector((state) => state.character.currentPage);
+  const filter = useAppSelector((state) => state.character.filter);
 
   const totalCharacters = characters?.length || 0;
   const totalPage = Math.ceil(totalCharacters / 20);
+
+  useEffect(() => {
+    dispatch(setFilter(""));
+  }, [dispatch]);
 
   useMemo(() => {
     if (selectedLocation?.residents && selectedLocation.residents.length) {
@@ -66,40 +71,55 @@ export const CharacterPage = () => {
     dispatch(setFilter(filter));
   };
 
+  const filteredCharacters = useMemo(() => {
+    if (filter === "") {
+      return characters;
+    }
+
+    if (characters?.length) {
+      return characters.filter((character) => {
+        return character.status.toLowerCase() === filter;
+      });
+    }
+    return [];
+  }, [characters, filter]);
+
   const paginatedCharacters =
-    characters.length > 20
-      ? characters?.slice((currentPage - 1) * 20, currentPage * 20)
-      : characters;
+    filteredCharacters.length > 20
+      ? filteredCharacters?.slice((currentPage - 1) * 20, currentPage * 20)
+      : filteredCharacters;
 
   return (
     <div>
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        <div className={styles.container}>
-          <div className={styles.filter}>
-            <h3 className={styles.filter__title}>Filter by status:</h3>
-            <div className={styles.filter__group}>
-              {(["alive", "dead", "unknown"] as CharacterFilters[]).map(
-                (filter) => (
-                  <FilterButton
-                    filter={filter}
-                    handleClick={() => handleClickFilter(filter)}
-                    key={filter}
-                  />
-                )
-              )}
-            </div>
+      <div className={styles.container}>
+        <div className={styles.filter}>
+          <h3 className={styles.filter__title}>Filter by status:</h3>
+          <div className={styles.filter__group}>
+            {(["alive", "dead", "unknown"] as CharacterFilters[]).map(
+              (filter) => (
+                <FilterButton
+                  filter={filter}
+                  handleClick={() => handleClickFilter(filter)}
+                  key={filter}
+                />
+              )
+            )}
           </div>
-
+        </div>
+        {error ? (
+          <p className={styles.error}>{error}</p>
+        ) : (
           <ul>
             {paginatedCharacters?.map((character) => (
               <li onClick={handleClick(character.id)} key={character.id}>
-                {character.name}
+                {character.name} - {character.status}
               </li>
             ))}
           </ul>
-
+        )}
+      </div>
+      {filteredCharacters.length > 20 && (
+        <div className={styles.pagination}>
           <Pagination
             currentPage={currentPage}
             totalPages={totalPage}
