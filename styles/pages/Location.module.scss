@@ -1,0 +1,12 @@
+.locations {
+    margin: 0 auto;
+    padding: 2.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 3.125rem;
+    justify-content: center;
+
+    @media screen and (max-width: 768px) {
+        padding: 1.25rem 1rem;
+    }
+}
