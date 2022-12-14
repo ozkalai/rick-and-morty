@@ -53,9 +53,11 @@ function Home({ locations }: { locations: LocationResponse }) {
         <div className={styles.container}>
           <div className={styles.locations}>
             {locationsFromStore?.results?.map((location: Location) => (
-              <div onClick={() => handlePageChange(location)} key={location.id}>
-                <LocationCard location={location} />
-              </div>
+              <LocationCard
+                location={location}
+                onClick={() => handlePageChange(location)}
+                key={location.id}
+              />
             ))}
           </div>
         </div>
