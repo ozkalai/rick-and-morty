@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../src/store/hooks";
 import { Pagination } from "../../src/components/Pagination";
-import { setIsLoading } from "../../src/store/slices/locations";
 import {
   setError,
   setCharacters,
@@ -29,10 +28,6 @@ export const CharacterPage = () => {
 
   const totalCharacters = characters?.length || 0;
   const totalPage = Math.ceil(totalCharacters / 20);
-
-  useEffect(() => {
-    dispatch(setIsLoading(false));
-  }, [dispatch]);
 
   useMemo(() => {
     if (selectedLocation?.residents && selectedLocation.residents.length) {
