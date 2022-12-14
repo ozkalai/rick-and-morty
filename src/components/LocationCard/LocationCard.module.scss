@@ -1,0 +1,30 @@
+@import "../../../styles/config/variables";
+
+.card {
+    border-radius: $border-radius;
+    background-color: $tertiary-color;
+    padding: 1rem 1.625rem;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        align-items: center;
+        margin-bottom: 0.625rem;
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+        border: 1px solid red;
+    }
+
+    &__subheader {
+        min-width: 150px;
+    }
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 1rem 1.125rem;
+    }
+}
