@@ -26,9 +26,6 @@
         font-weight: 400;
     }
 }
-
-// fix padding on mobile devices
-
 @media screen and (max-width: 768px) {
     .card {
         padding: 1rem 1rem;
