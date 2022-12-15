@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from "react";
+import Head from "next/head";
 import { useDispatch } from "react-redux";
 import { getLocations } from "../src/services/get-locations";
 import { useRouter } from "next/router";
@@ -48,30 +49,40 @@ function Home({ locations }: { locations: LocationResponse }) {
   const totalPages = locations?.info?.pages;
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>Rick and Morty</title>
+        <meta
+          name="description"
+          content="Check out Rick and Morty TV Series locations and characters. You can find lots of detail information about them."
+          key="desc"
+        />
+      </Head>
       <div>
-        <div className={styles.container}>
-          <div className={styles.locations}>
-            {locationsFromStore?.results?.map((location: Location) => (
-              <LocationCard
-                location={location}
-                onClick={() => handlePageChange(location)}
-                key={location.id}
-              />
-            ))}
+        <div>
+          <div className={styles.container}>
+            <div className={styles.locations}>
+              {locationsFromStore?.results?.map((location: Location) => (
+                <LocationCard
+                  location={location}
+                  onClick={() => handlePageChange(location)}
+                  key={location.id}
+                />
+              ))}
+            </div>
+          </div>
+          <div className={styles.pagination__wapper}>
+            <Pagination
+              onPageChange={(page: number) => {
+                dispatch(setCurrentPage(page));
+              }}
+              currentPage={currentPage}
+              totalPages={totalPages}
+            />
           </div>
         </div>
-        <div className={styles.pagination__wapper}>
-          <Pagination
-            onPageChange={(page: number) => {
-              dispatch(setCurrentPage(page));
-            }}
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
-        </div>
       </div>
-    </div>
+    </>
   );
 }
 

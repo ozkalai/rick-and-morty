@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import { getCharacter } from "../../src/services/get-character";
 import { useAppSelector } from "../../src/store/hooks";
 import { Character, CharacterFilters } from "../../src/types/Character";
@@ -22,51 +23,66 @@ const CharacterDetailPage = ({ character }: Props) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.detail}>
-        <div className={styles.image__wrapper}>
-          <img className={styles.image} src={image} alt={name} />
-        </div>
-        <div className={styles.character__info}>
-          <div className={styles.character__info__left}>
-            <h1 className={styles.character__name}>{name}</h1>
-            <div className={styles.character__status}>
-              <div className={styles[character?.status?.toLowerCase()]} />
-              <h3 className={styles.character__status__text}>
-                {status}-{species}
-              </h3>
-            </div>
-            <div className={styles.character__status__text}>{origin.name}</div>
+    <>
+      <Head>
+        <title>Rick and Morty Character Detail</title>
+        <meta
+          name="description"
+          content="Here you can find the details of the character you selected and other characters in the same location and status as the character you selected."
+          key="desc"
+        />
+      </Head>
+      <div className={styles.container}>
+        <div className={styles.detail}>
+          <div className={styles.image__wrapper}>
+            <img className={styles.image} src={image} alt={name} />
           </div>
-          <div className={styles.character__info__right}>{gender}</div>
-        </div>
-      </div>
-      <div className={styles.other__characters}>
-        <h1 className={styles.other__characters__title}>Other characters</h1>
-        <div className={styles.other__characters__list}>
-          {otherCharacters.map((character) => (
-            <div className={styles.other__characters__card} key={character.id}>
-              <img
-                className={styles.other__characters__image}
-                src={character.image}
-                alt={character.name}
-              />
-              <div className={styles.other__characters__info}>
-                <h2 className={styles.other__characters__name}>
-                  {character.name}
-                </h2>
-                <div className={styles.other__characters__origin}>
-                  {character.origin.name}
-                </div>
-                <div className={styles.other__characters__gender}>
-                  {character.gender}
-                </div>
+          <div className={styles.character__info}>
+            <div className={styles.character__info__left}>
+              <h1 className={styles.character__name}>{name}</h1>
+              <div className={styles.character__status}>
+                <div className={styles[character?.status?.toLowerCase()]} />
+                <h3 className={styles.character__status__text}>
+                  {status}-{species}
+                </h3>
+              </div>
+              <div className={styles.character__status__text}>
+                {origin.name}
               </div>
             </div>
-          ))}
+            <div className={styles.character__info__right}>{gender}</div>
+          </div>
+        </div>
+        <div className={styles.other__characters}>
+          <h1 className={styles.other__characters__title}>Other characters</h1>
+          <div className={styles.other__characters__list}>
+            {otherCharacters.map((character) => (
+              <div
+                className={styles.other__characters__card}
+                key={character.id}
+              >
+                <img
+                  className={styles.other__characters__image}
+                  src={character.image}
+                  alt={character.name}
+                />
+                <div className={styles.other__characters__info}>
+                  <h2 className={styles.other__characters__name}>
+                    {character.name}
+                  </h2>
+                  <div className={styles.other__characters__origin}>
+                    {character.origin.name}
+                  </div>
+                  <div className={styles.other__characters__gender}>
+                    {character.gender}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

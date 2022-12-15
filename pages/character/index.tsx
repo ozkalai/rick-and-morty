@@ -13,6 +13,7 @@ import FilterButton from "../../src/components/FilterButton";
 import { CharacterFilters } from "../../src/types/Character";
 import styles from "../../styles/pages/Character.module.scss";
 import Character from "../../src/components/Character";
+import Head from "next/head";
 
 export const CharacterPage = () => {
   const [residentsIds, setResidentsIds] = useState<number[]>();
@@ -93,6 +94,14 @@ export const CharacterPage = () => {
 
   return (
     <div>
+      <Head>
+        <title>Rick and Morty Characters</title>
+        <meta
+          name="description"
+          content="You can find all characters of selected location here."
+          key="desc"
+        />
+      </Head>
       <div className={styles.container}>
         <div className={styles.filter}>
           <h3 className={styles.filter__title}>Filter by status:</h3>
