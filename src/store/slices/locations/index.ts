@@ -10,7 +10,7 @@ type LocationState = {
 const initialState: LocationState = {
   selectedLocation: [] as unknown as Location,
   locations: {} as LocationResponse,
-  currentPage: 2,
+  currentPage: 1,
 };
 
 const locationsSlice = createSlice({
