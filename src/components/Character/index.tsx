@@ -16,7 +16,7 @@ const Character = ({
       </div>
       <h1 className={styles.character__name}>{name}</h1>
       <div className={styles.character__status}>
-        <div className={styles[character.status.toLowerCase()]} />
+        <div className={styles[character?.status?.toLowerCase()]} />
         <h3 className={styles.character__status__text}>
           {status}-{species}
         </h3>
