@@ -1,6 +1,8 @@
 import styles from "./Header.module.scss";
 import BackIcon from "../../components/LeftIcon";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import logo from "../../../public/logo.svg";
 
 const Header: React.FC = () => {
   const { back, pathname } = useRouter();
@@ -10,7 +12,7 @@ const Header: React.FC = () => {
       {isGoBackIconVisible && (
         <BackIcon onClick={back} className={styles.header__icon} />
       )}
-      <img className={styles.header__logo} src="logo.svg" />
+      <Image className={styles.header__logo} src={logo} alt="logo" />
     </div>
   );
 };
