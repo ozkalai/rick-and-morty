@@ -5,7 +5,7 @@
 ## Features
 
 - List of locations, with the ability to view characters that reside in each location
-- Filter characters by satus
+- Filter characters by status
 - Character details, including other characters with the same location and status
 
 ## Tech Stack
