@@ -12,7 +12,12 @@ const Header: React.FC = () => {
       {isGoBackIconVisible && (
         <BackIcon onClick={back} className={styles.header__icon} />
       )}
-      <Image className={styles.header__logo} src={logo} alt="logo" />
+      <Image
+        loading={"lazy"}
+        className={styles.header__logo}
+        src={logo}
+        alt="logo"
+      />
     </div>
   );
 };
