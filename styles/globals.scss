@@ -1,0 +1,52 @@
+@import "./config/variables";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $font-family;
+}
+
+h1 {
+  font-size: $h1-font-size;
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  font-size: $h2-font-size;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  font-size: $h3-font-size;
+  padding: 0;
+  margin: 0;
+}
+
+h4 {
+  font-size: $h4-font-size;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+  body {
+    color: black;
+    background: $background-color;;
+  }
+}
+

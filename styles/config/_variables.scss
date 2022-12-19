@@ -1,0 +1,54 @@
+/*
+colors
+*/
+
+$primary-color: #44281D;
+$secondary-color: #E4A788;
+$tertiary-color: #EFE04B;
+$quaternary-color: #98cd4d;
+$quaternary-idle-active-color: rgb(152, 205, 77, 0.05);
+$quaternary-idle-passive-color: rgb(152, 205, 77, 0.25);
+$quaternary-hover-color: rgb(152, 205, 77, 0.2);
+$quaternary-pressed-color: rgb(152, 205, 77, 0.5);
+$quinary-color: #E899C7;
+$red-color: rgb(185, 0, 0);
+$red-idle-active-color: rgb(185, 0, 0, 0.05);
+$red-idle-passive-color: rgb(185, 0, 0);
+$red-hover-color: rgb(185, 0, 0, 0.2);
+$red-pressed-color: rgb(185, 0, 0, 0.5);
+$green-color: #98CD4D;
+$green-idle-active-color: rgb(152, 205, 77, 0.05);
+$gray-color: #B8B8B8;
+$gray-idle-active-color: rgb(184, 184, 184, 0.05);
+$gray-idle-passive-color: rgb(184, 184, 184);
+$gray-hover-color: rgb(184, 184, 184, 0.2);
+$gray-pressed-color: rgb(184, 184, 184, 0.5);
+$gray-thin-color: #D9D9D9;
+$background-color: #F5F5F5;
+$logo-color: rgb(17, 176, 200);
+$logo-color-slighly-transparent: rgba(17, 176, 200, 0.11);
+
+/* 
+header font sizes
+*/
+
+$h1-font-size: 24px;
+$h2-font-size: 18px;
+$h3-font-size: 16px;
+$h4-font-size: 13px;
+
+
+/*
+font family
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap');
+
+$font-family: 'Poppins', sans-serif;
+
+
+/*
+border
+*/
+
+$border-radius: 15px;
